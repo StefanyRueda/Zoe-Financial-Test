@@ -1,0 +1,44 @@
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+buildscript {
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    ext {
+        serenityVersion = '2.1.10'
+        serenityCucumberVersion = '1.9.45'
+    }
+
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.70")
+    }
+}
+
+
+apply plugin: 'java'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+compileJava.options.encoding="UTF-8"
+compileTestJava.options.encoding="UTF-8"
+
+ext {
+    serenityVersion = '2.1.10'
+    serenityCucumberVersion = '1.9.45'
+}
+
+dependencies {
+    implementation 'junit:junit:4.13.2'
+    testImplementation "net.serenity-bdd:serenity-junit:$rootProject.ext.serenityVersion"
+    implementation 'net.serenity-bdd:serenity-screenplay-rest:3.2.5'
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.4.0'
+    implementation "net.serenity-bdd:serenity-cucumber:3.2.5"
+
+}
+
+gradle.startParameter.continueOnFailure = true
